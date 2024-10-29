@@ -21,7 +21,12 @@ const UserPage = () => {
     setIsEditName(true);
   };
 
-  if (loading) return <p>Loading...</p>;
+  if (loading)
+    return (
+      <main className="center-wrapper">
+        <p>Loading...</p>
+      </main>
+    );
   return (
     <main className="main bg-dark">
       {isEditName ? (
