@@ -23,12 +23,40 @@ const SigninPage = () => {
         password: password,
       }),
     });
+    if (!data.ok) {
+      console.log("login error");
+      return;
+    }
     const response = await data.json();
     console.log(response.body);
     // localStorage.setItem("token", response.body.token);
     const token = response.body.token;
+    const userResponse = await fetch(
+      "http://localhost:3001/api/v1/user/profile",
+      {
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
+        },
+      }
+    );
+    if (!userResponse.ok) {
+      console.log("user error");
+      return;
+    }
+    const userData = await userResponse.json();
     const rememberMe = rememberCheckboxref.current.checked;
-    dispatch(login(token, { firstName: "", lastName: "" }, rememberMe));
+    dispatch(
+      login(
+        token,
+        {
+          firstName: userData.body.firstName,
+          lastName: userData.body.lastName,
+        },
+        rememberMe
+      )
+    );
     navigate("/profile");
   };
 

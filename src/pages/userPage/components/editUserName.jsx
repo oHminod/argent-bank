@@ -1,7 +1,11 @@
 import PropTypes from "prop-types";
+import { useDispatch, useSelector } from "react-redux";
+import { updateUserData } from "../../../redux/actions/authActions";
 
-const EditUserName = ({ userData, setIsEditName, setUserData }) => {
-  const { firstName, lastName } = userData;
+const EditUserName = ({ setIsEditName }) => {
+  const token = useSelector((state) => state.auth.token);
+  const { firstName, lastName } = useSelector((state) => state.auth.userData);
+  const dispatch = useDispatch();
 
   const handleCancel = () => {
     setIsEditName(false);
@@ -15,8 +19,6 @@ const EditUserName = ({ userData, setIsEditName, setUserData }) => {
     const newFirstName = firstNameInput || firstName;
     const newLastName = lastNameInput || lastName;
     console.log(newFirstName, newLastName);
-    setUserData({ firstName: newFirstName, lastName: newLastName });
-    const token = localStorage.getItem("token");
     const response = await fetch("http://localhost:3001/api/v1/user/profile", {
       method: "PUT",
       headers: {
@@ -29,6 +31,9 @@ const EditUserName = ({ userData, setIsEditName, setUserData }) => {
       }),
     });
     await response.json();
+    dispatch(
+      updateUserData({ firstName: newFirstName, lastName: newLastName })
+    );
     setIsEditName(false);
   };
 

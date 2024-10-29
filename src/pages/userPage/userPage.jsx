@@ -2,66 +2,68 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import EditUserName from "./components/editUserName";
 import { useSelector } from "react-redux";
-import { login } from "../../redux/actions/authActions";
-import { useDispatch } from "react-redux";
+// import { login } from "../../redux/actions/authActions";
 
 const UserPage = () => {
-  const [userData, setUserData] = useState(null);
   const [isEditName, setIsEditName] = useState(false);
-  const dispatch = useDispatch();
   const token = useSelector((state) => state.auth.token);
-  const rememberMe = useSelector((state) => state.auth.rememberMe);
+  const { firstName, lastName } = useSelector((state) => state.auth.userData);
 
   const navigate = useNavigate();
 
   useEffect(() => {
-    const getUserData = async () => {
-      //   const token = localStorage.getItem("token");
-      if (!token) return navigate("/");
-      const response = await fetch(
-        "http://localhost:3001/api/v1/user/profile",
-        {
-          method: "POST",
-          headers: {
-            Authorization: `Bearer ${token}`,
-            "Content-Type": "application/json",
-          },
-        }
-      );
-      const data = await response.json();
-      console.log("user data", data);
-      setUserData(data.body);
-      dispatch(
-        login(
-          token,
-          { firstName: data.body.firstName, lastName: data.body.lastName },
-          rememberMe
-        )
-      );
-    };
-    getUserData();
+    if (!token) return navigate("/");
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  // useEffect(() => {
+  //   const getUserData = async () => {
+  //     //   const token = localStorage.getItem("token");
+  //     if (!token) return navigate("/");
+  //     const response = await fetch(
+  //       "http://localhost:3001/api/v1/user/profile",
+  //       {
+  //         method: "POST",
+  //         headers: {
+  //           Authorization: `Bearer ${token}`,
+  //           "Content-Type": "application/json",
+  //         },
+  //       }
+  //     );
+  //     const data = await response.json();
+  //     console.log("user data", data);
+  //     setUserData(data.body);
+  //     dispatch(
+  //       login(
+  //         token,
+  //         { firstName: data.body.firstName, lastName: data.body.lastName },
+  //         rememberMe
+  //       )
+  //     );
+  //   };
+  //   getUserData();
+  //   // eslint-disable-next-line react-hooks/exhaustive-deps
+  // }, []);
 
   const handleEditName = () => {
     setIsEditName(true);
   };
 
-  if (!userData) return <div>Loading...</div>;
+  // if (!userData) return <div>Loading...</div>;
   return (
     <main className="main bg-dark">
       {isEditName ? (
         <EditUserName
-          userData={userData}
+          // userData={userData}
           setIsEditName={setIsEditName}
-          setUserData={setUserData}
+          // setUserData={setUserData}
         />
       ) : (
         <div className="header">
           <h1>
             Welcome back
             <br />
-            {userData?.firstName + " " + userData?.lastName}!
+            {firstName + " " + lastName}!
           </h1>
           <button className="edit-button" onClick={handleEditName}>
             Edit Name
