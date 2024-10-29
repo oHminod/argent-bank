@@ -2,10 +2,10 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import EditUserName from "./components/editUserName";
 import { useSelector } from "react-redux";
-// import { login } from "../../redux/actions/authActions";
 
 const UserPage = () => {
   const [isEditName, setIsEditName] = useState(false);
+  const [loading, setLoading] = useState(true);
   const token = useSelector((state) => state.auth.token);
   const { firstName, lastName } = useSelector((state) => state.auth.userData);
 
@@ -13,51 +13,19 @@ const UserPage = () => {
 
   useEffect(() => {
     if (!token) return navigate("/");
+    setLoading(false);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-
-  // useEffect(() => {
-  //   const getUserData = async () => {
-  //     //   const token = localStorage.getItem("token");
-  //     if (!token) return navigate("/");
-  //     const response = await fetch(
-  //       "http://localhost:3001/api/v1/user/profile",
-  //       {
-  //         method: "POST",
-  //         headers: {
-  //           Authorization: `Bearer ${token}`,
-  //           "Content-Type": "application/json",
-  //         },
-  //       }
-  //     );
-  //     const data = await response.json();
-  //     console.log("user data", data);
-  //     setUserData(data.body);
-  //     dispatch(
-  //       login(
-  //         token,
-  //         { firstName: data.body.firstName, lastName: data.body.lastName },
-  //         rememberMe
-  //       )
-  //     );
-  //   };
-  //   getUserData();
-  //   // eslint-disable-next-line react-hooks/exhaustive-deps
-  // }, []);
 
   const handleEditName = () => {
     setIsEditName(true);
   };
 
-  // if (!userData) return <div>Loading...</div>;
+  if (loading) return <p>Loading...</p>;
   return (
     <main className="main bg-dark">
       {isEditName ? (
-        <EditUserName
-          // userData={userData}
-          setIsEditName={setIsEditName}
-          // setUserData={setUserData}
-        />
+        <EditUserName setIsEditName={setIsEditName} />
       ) : (
         <div className="header">
           <h1>

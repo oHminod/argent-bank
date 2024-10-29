@@ -2,7 +2,7 @@ export const loadState = () => {
   try {
     const serializedState = localStorage.getItem("appState");
     if (serializedState === null) {
-      return undefined; // Laisser le reducer gérer l'état initial
+      return undefined;
     }
     return JSON.parse(serializedState);
   } catch (err) {
@@ -16,6 +16,6 @@ export const saveState = (state) => {
     const serializedState = JSON.stringify(state);
     localStorage.setItem("appState", serializedState);
   } catch {
-    // Ignorer les erreurs d'écriture
+    console.log("saveState error");
   }
 };

@@ -12,7 +12,7 @@ const SigninPage = () => {
     e.preventDefault();
     const username = e.currentTarget.elements.namedItem("username").value;
     const password = e.currentTarget.elements.namedItem("password").value;
-    console.log(username, password);
+
     const data = await fetch("http://localhost:3001/api/v1/user/login", {
       method: "POST",
       headers: {
@@ -23,14 +23,15 @@ const SigninPage = () => {
         password: password,
       }),
     });
+
     if (!data.ok) {
       console.log("login error");
       return;
     }
+
     const response = await data.json();
-    console.log(response.body);
-    // localStorage.setItem("token", response.body.token);
     const token = response.body.token;
+
     const userResponse = await fetch(
       "http://localhost:3001/api/v1/user/profile",
       {
@@ -41,12 +42,16 @@ const SigninPage = () => {
         },
       }
     );
+
     if (!userResponse.ok) {
       console.log("user error");
       return;
     }
+
     const userData = await userResponse.json();
+
     const rememberMe = rememberCheckboxref.current.checked;
+
     dispatch(
       login(
         token,
@@ -57,6 +62,7 @@ const SigninPage = () => {
         rememberMe
       )
     );
+
     navigate("/profile");
   };
 
@@ -78,9 +84,6 @@ const SigninPage = () => {
             <input type="checkbox" id="remember-me" ref={rememberCheckboxref} />
             <label htmlFor="remember-me">Remember me</label>
           </div>
-          {/* <a href="./user.html" className="sign-in-button">
-            Sign In
-          </a> */}
           <button className="sign-in-button" type="submit">
             Sign In
           </button>

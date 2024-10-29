@@ -13,12 +13,13 @@ const EditUserName = ({ setIsEditName }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
     const firstNameInput =
       e.currentTarget.elements.namedItem("firstName").value;
     const lastNameInput = e.currentTarget.elements.namedItem("lastName").value;
     const newFirstName = firstNameInput || firstName;
     const newLastName = lastNameInput || lastName;
-    console.log(newFirstName, newLastName);
+
     const response = await fetch("http://localhost:3001/api/v1/user/profile", {
       method: "PUT",
       headers: {
@@ -30,10 +31,13 @@ const EditUserName = ({ setIsEditName }) => {
         lastName: newLastName,
       }),
     });
+
     await response.json();
+
     dispatch(
       updateUserData({ firstName: newFirstName, lastName: newLastName })
     );
+
     setIsEditName(false);
   };
 
@@ -68,12 +72,7 @@ const EditUserName = ({ setIsEditName }) => {
 };
 
 EditUserName.propTypes = {
-  userData: PropTypes.shape({
-    firstName: PropTypes.string.isRequired,
-    lastName: PropTypes.string.isRequired,
-  }).isRequired,
   setIsEditName: PropTypes.func.isRequired,
-  setUserData: PropTypes.func.isRequired,
 };
 
 export default EditUserName;
