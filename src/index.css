@@ -265,16 +265,23 @@ a img:hover,
 
 .center-wrapper h1 {
   color: red;
-  font-size: 4rem;
-  font-weight: bold;
+  font-size: 8rem;
+  font-weight: 900;
   margin: 0;
 }
 
 .center-wrapper a {
   color: #00bc77;
   font-size: 1.5rem;
-  font-weight: bold;
+  font-weight: 700;
   margin-top: 3rem;
+}
+
+.error-message {
+  color: grey;
+  font-size: 1.2rem;
+  font-weight: 500;
+  font-style: italic;
 }
 
 .footer {

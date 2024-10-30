@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
 import { getUser } from "../utils/data-access-layer";
 import { logout, updateUserData } from "../redux/actions/authActions";
 
@@ -10,10 +9,12 @@ const useUserData = () => {
   const token = useSelector((state) => state.auth.token);
 
   const dispatch = useDispatch();
-  const navigate = useNavigate();
 
   useEffect(() => {
-    if (!token) return navigate("/");
+    if (!token) {
+      setLoading(false);
+      return setError({ status: 404, message: "That page doesn't exist..." });
+    }
     const fetchUserData = async () => {
       const userResponse = await getUser(token);
 

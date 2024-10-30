@@ -22,7 +22,11 @@ const Router = () => {
         { path: "profile", element: <UserPage /> },
         {
           path: "*",
-          element: <ErrorPage />,
+          element: (
+            <ErrorPage
+              error={{ status: 404, message: "That page doesn't exist..." }}
+            />
+          ),
         },
       ],
     },

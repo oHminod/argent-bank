@@ -4,9 +4,9 @@ import PropTypes from "prop-types";
 const ErrorPage = ({ error }) => {
   return (
     <main className="center-wrapper">
-      <h1>{error?.status || "404"}</h1>
-      <p>
-        {error?.statusText || error?.message || "That page doesn't exist..."}
+      <h1>{error?.status || "520"}</h1>
+      <p className="error-message">
+        {error?.statusText || error?.message || "Unknown error..."}
       </p>
       <Link to="/">Back to Home</Link>
     </main>
