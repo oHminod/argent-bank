@@ -39,12 +39,15 @@ main {
   position: absolute !important;
   width: 1px !important;
   white-space: nowrap !important;
+  z-index: -1000 !important;
 }
 
 a:hover,
 button:hover,
 input[type="checkbox"]:hover,
-label:hover {
+label:hover,
+a img:hover,
+.main-nav .main-nav-logo img.main-nav-logo-image:hover {
   cursor: pointer;
 }
 
@@ -59,6 +62,7 @@ label:hover {
 .main-nav button {
   font-weight: bold;
   color: #2c3e50;
+  cursor: pointer;
 }
 
 .main-nav button {
@@ -173,18 +177,6 @@ label:hover {
   margin-bottom: 0.5rem;
 }
 
-/* .sr-only {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  padding: 0;
-  margin: -1px;
-  overflow: hidden;
-  clip: rect(0, 0, 0, 0);
-  white-space: nowrap;
-  border-width: 0;
-} */
-
 .sign-in-button {
   display: block;
   width: 100%;
@@ -239,6 +231,8 @@ label:hover {
   justify-content: center;
   align-items: center;
   gap: 1rem;
+  flex-direction: column;
+  padding: 1rem;
 }
 
 .edit-name button {
@@ -246,20 +240,22 @@ label:hover {
   color: blue;
   border: none;
   padding: 0.4rem;
-  width: 100px;
+  width: 99px;
 }
 
-.left-wrapper {
+.edit-wrapper {
   display: flex;
-  flex-direction: column;
-  align-items: end;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  width: 100%;
 }
 
-.right-wrapper {
-  display: flex;
-  flex-direction: column;
-  align-items: start;
+.edit-wrapper .input-wrapper {
+  margin: 0;
 }
+
 .center-wrapper {
   display: flex;
   flex-direction: column;

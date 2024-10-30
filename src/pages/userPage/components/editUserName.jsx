@@ -48,22 +48,22 @@ const EditUserName = ({ setIsEditName }) => {
         <br />
       </h1>
       <form className="edit-name" onSubmit={handleSubmit}>
-        <div className="left-wrapper">
+        <div className="edit-wrapper">
           <div className="input-wrapper">
-            <label htmlFor="firstName" className="sr-only">
+            <label htmlFor="firstName" className="only-sr">
               firstName
             </label>
             <input type="text" id="firstName" placeholder={firstName} />
           </div>
-          <button type="submit">Save</button>
-        </div>
-        <div className="right-wrapper">
           <div className="input-wrapper">
-            <label htmlFor="lastName" className="sr-only">
+            <label htmlFor="lastName" className="only-sr">
               lastName
             </label>
             <input type="lastName" id="lastName" placeholder={lastName} />
           </div>
+        </div>
+        <div className="edit-wrapper">
+          <button type="submit">Save</button>
           <button onClick={handleCancel} type="button">
             Cancel
           </button>

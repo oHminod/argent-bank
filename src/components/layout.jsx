@@ -21,14 +21,13 @@ const Layout = () => {
   return (
     <>
       <nav className="main-nav">
-        <Link className="main-nav-logo" to="/" style={{ cursor: "pointer" }}>
+        <h1 className="sr-only">Argent Bank</h1>
+        <Link className="main-nav-logo" to="/">
           <img
             className="main-nav-logo-image"
             src="/argentBankLogo.png"
             alt="Argent Bank Logo"
-            style={{ cursor: "pointer" }}
           />
-          {/* <h1 className="sr-only">Argent Bank</h1> */}
         </Link>
         {token ? (
           <div>
