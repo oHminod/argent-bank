@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { getUser } from "../utils/data-access-layer";
-import { logout } from "../redux/actions/authActions";
+import { logout, updateUserData } from "../redux/actions/authActions";
 
 const useUserData = () => {
   const [loading, setLoading] = useState(true);
@@ -20,6 +20,9 @@ const useUserData = () => {
       if (!userResponse.ok) {
         dispatch(logout());
         setError(userResponse);
+      } else {
+        const userData = userResponse.userData;
+        dispatch(updateUserData(userData));
       }
     };
     fetchUserData();

@@ -29,6 +29,10 @@ export const getUser = async (token) => {
 
   if (!response.ok) return response;
 
-  const userData = await response.json();
+  const data = await response.json();
+  //   console.log(data.body);
+
+  const userData = data.body;
+
   return { ok: response.ok, userData };
 };

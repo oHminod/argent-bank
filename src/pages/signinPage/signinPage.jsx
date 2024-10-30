@@ -2,7 +2,7 @@ import { useRef, useState } from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { login } from "../../redux/actions/authActions";
-import { getUser, signinUser } from "../../utils/data-access-layer";
+import { signinUser } from "../../utils/data-access-layer";
 import ErrorPage from "../errorPage";
 
 const SigninPage = () => {
@@ -21,27 +21,11 @@ const SigninPage = () => {
     const signinResponse = await signinUser(username, password);
     if (!signinResponse.ok) setError(signinResponse);
 
-    const token = signinResponse.token;
+    if (signinResponse.ok) {
+      const token = signinResponse.token;
+      const rememberMe = rememberCheckboxref.current?.checked || false;
 
-    const userResponse = await getUser(token);
-    if (!userResponse.ok)
-      setError((prev) => (prev === null ? userResponse : prev));
-
-    const rememberMe = rememberCheckboxref.current?.checked || false;
-
-    const userData = userResponse.userData;
-
-    if (userData) {
-      dispatch(
-        login(
-          token,
-          {
-            firstName: userData.body.firstName,
-            lastName: userData.body.lastName,
-          },
-          rememberMe
-        )
-      );
+      dispatch(login(token, rememberMe));
 
       navigate("/profile");
     }

@@ -1,6 +1,10 @@
 const initialState = {
   token: null,
   userData: {
+    id: "",
+    createdAt: "",
+    updatedAt: "",
+    email: "",
     firstName: "",
     lastName: "",
   },
@@ -13,20 +17,14 @@ const authReducer = (state = initialState, action) => {
       return {
         ...state,
         token: action.payload.token,
-        userData: action.payload.userData,
         rememberMe: action.payload.rememberMe,
       };
     case "LOGOUT":
-      return {
-        ...state,
-        token: null,
-        userData: { firstName: "", lastName: "" },
-        rememberMe: false,
-      };
+      return initialState;
     case "UPDATE_USER_DATA":
       return {
         ...state,
-        userData: action.payload,
+        userData: { ...state.userData, ...action.payload },
       };
     default:
       return state;
