@@ -1,8 +1,10 @@
 import PropTypes from "prop-types";
 import { useDispatch, useSelector } from "react-redux";
 import { updateUserData } from "../../../redux/actions/authActions";
+import { useState } from "react";
 
 const EditUserName = ({ setIsEditName }) => {
+  const [error, setError] = useState(null);
   const token = useSelector((state) => state.auth.token);
   const { firstName, lastName } = useSelector((state) => state.auth.userData);
   const dispatch = useDispatch();
@@ -32,6 +34,7 @@ const EditUserName = ({ setIsEditName }) => {
       }),
     });
 
+    if (!response.ok) return setError(response);
     await response.json();
 
     dispatch(
@@ -69,6 +72,15 @@ const EditUserName = ({ setIsEditName }) => {
           </button>
         </div>
       </form>
+      {error && (
+        <>
+          <p className="error">
+            {error.status +
+              " - " +
+              (error.message || error.statusText || "Unknown error")}
+          </p>
+        </>
+      )}
     </div>
   );
 };
