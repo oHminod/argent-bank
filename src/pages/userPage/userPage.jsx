@@ -1,19 +1,46 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import EditUserName from "./components/editUserName";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import ErrorPage from "../errorPage";
+import { logout } from "../../redux/actions/authActions";
 
 const UserPage = () => {
   const [isEditName, setIsEditName] = useState(false);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
   const token = useSelector((state) => state.auth.token);
   const { firstName, lastName } = useSelector((state) => state.auth.userData);
 
+  const dispatch = useDispatch();
   const navigate = useNavigate();
 
   useEffect(() => {
     if (!token) return navigate("/");
+    const fetchUserData = async () => {
+      const userResponse = await fetch(
+        "http://localhost:3001/api/v1/user/profile",
+        {
+          method: "POST",
+          headers: {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "application/json",
+          },
+        }
+      );
+
+      if (!userResponse.ok) {
+        dispatch(logout());
+        setError(userResponse);
+      }
+    };
+    fetchUserData();
     setLoading(false);
+
+    return () => {
+      setError(null);
+      setLoading(true);
+    };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -27,6 +54,8 @@ const UserPage = () => {
         <p>Loading...</p>
       </main>
     );
+  if (error) return <ErrorPage error={error} />;
+
   return (
     <main className="main bg-dark">
       {isEditName ? (
