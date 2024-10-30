@@ -20,11 +20,11 @@ const useUserData = () => {
 
       if (!userResponse.ok) {
         dispatch(logout());
-        setError(userResponse);
-      } else {
-        const userData = userResponse.userData;
-        dispatch(updateUserData(userData));
+        return setError(userResponse);
       }
+
+      const userData = userResponse.userData;
+      dispatch(updateUserData(userData));
     };
     fetchUserData();
     setLoading(false);

@@ -19,16 +19,13 @@ const SigninPage = () => {
       e.currentTarget.elements.namedItem("password").value || null;
 
     const signinResponse = await signinUser(username, password);
-    if (!signinResponse.ok) setError(signinResponse);
 
-    if (signinResponse.ok) {
-      const token = signinResponse.token;
-      const rememberMe = rememberCheckboxref.current?.checked || false;
+    if (!signinResponse.ok) return setError(signinResponse);
 
-      dispatch(login(token, rememberMe));
-
-      navigate("/profile");
-    }
+    const token = signinResponse.token;
+    const rememberMe = rememberCheckboxref.current?.checked || false;
+    dispatch(login(token, rememberMe));
+    navigate("/profile");
   };
 
   if (error) return <ErrorPage error={error} />;
