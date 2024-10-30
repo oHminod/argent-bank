@@ -1,44 +1,9 @@
-import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
-import EditUserName from "./components/editUserName";
-import { useDispatch, useSelector } from "react-redux";
+import useUserData from "../../hooks/useUserData";
 import ErrorPage from "../errorPage";
-import { logout } from "../../redux/actions/authActions";
-import { getUser } from "../../utils/data-access-layer";
+import UserName from "./components/userName";
 
 const UserPage = () => {
-  const [isEditName, setIsEditName] = useState(false);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
-  const token = useSelector((state) => state.auth.token);
-  const { firstName, lastName } = useSelector((state) => state.auth.userData);
-
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
-
-  useEffect(() => {
-    if (!token) return navigate("/");
-    const fetchUserData = async () => {
-      const userResponse = await getUser(token);
-
-      if (!userResponse.ok) {
-        dispatch(logout());
-        setError(userResponse);
-      }
-    };
-    fetchUserData();
-    setLoading(false);
-
-    return () => {
-      setError(null);
-      setLoading(true);
-    };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
-  const handleEditName = () => {
-    setIsEditName(true);
-  };
+  const { loading, error } = useUserData();
 
   if (loading)
     return (
@@ -50,20 +15,7 @@ const UserPage = () => {
 
   return (
     <main className="main bg-dark">
-      {isEditName ? (
-        <EditUserName setIsEditName={setIsEditName} />
-      ) : (
-        <div className="header">
-          <h1>
-            Welcome back
-            <br />
-            {firstName + " " + lastName}!
-          </h1>
-          <button className="edit-button" onClick={handleEditName}>
-            Edit Name
-          </button>
-        </div>
-      )}
+      <UserName />
       <h2 className="sr-only">Accounts</h2>
       <section className="account">
         <div className="account-content-wrapper">
