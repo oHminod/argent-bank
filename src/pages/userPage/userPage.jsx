@@ -4,6 +4,7 @@ import EditUserName from "./components/editUserName";
 import { useDispatch, useSelector } from "react-redux";
 import ErrorPage from "../errorPage";
 import { logout } from "../../redux/actions/authActions";
+import { getUser } from "../../utils/data-access-layer";
 
 const UserPage = () => {
   const [isEditName, setIsEditName] = useState(false);
@@ -18,16 +19,7 @@ const UserPage = () => {
   useEffect(() => {
     if (!token) return navigate("/");
     const fetchUserData = async () => {
-      const userResponse = await fetch(
-        "http://localhost:3001/api/v1/user/profile",
-        {
-          method: "POST",
-          headers: {
-            Authorization: `Bearer ${token}`,
-            "Content-Type": "application/json",
-          },
-        }
-      );
+      const userResponse = await getUser(token);
 
       if (!userResponse.ok) {
         dispatch(logout());

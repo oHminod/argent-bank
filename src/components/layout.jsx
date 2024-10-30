@@ -1,9 +1,10 @@
 import { useDispatch, useSelector } from "react-redux";
-import { Link, Outlet, useNavigate } from "react-router-dom";
+import { Link, Outlet, useLocation, useNavigate } from "react-router-dom";
 import { logout } from "../redux/actions/authActions";
 
 const Layout = () => {
   const navigate = useNavigate();
+  const location = useLocation();
   const token = useSelector((state) => state.auth.token);
   const dispatch = useDispatch();
   const { firstName } = useSelector((state) => state.auth.userData);
@@ -13,16 +14,21 @@ const Layout = () => {
     navigate("/");
   };
 
+  const handleOnSignInPage = () => {
+    if (location.pathname === "/sign-in") navigate(0);
+  };
+
   return (
     <>
       <nav className="main-nav">
-        <Link className="main-nav-logo" to="/">
+        <Link className="main-nav-logo" to="/" style={{ cursor: "pointer" }}>
           <img
             className="main-nav-logo-image"
             src="/argentBankLogo.png"
             alt="Argent Bank Logo"
+            style={{ cursor: "pointer" }}
           />
-          <h1 className="sr-only">Argent Bank</h1>
+          {/* <h1 className="sr-only">Argent Bank</h1> */}
         </Link>
         {token ? (
           <div>
@@ -36,7 +42,11 @@ const Layout = () => {
           </div>
         ) : (
           <div>
-            <Link className="main-nav-item" to="/sign-in">
+            <Link
+              className="main-nav-item"
+              to="/sign-in"
+              onClick={handleOnSignInPage}
+            >
               <i className="fa fa-user-circle"></i> Sign In
             </Link>
           </div>

@@ -64,7 +64,9 @@ const EditUserName = ({ setIsEditName }) => {
             </label>
             <input type="lastName" id="lastName" placeholder={lastName} />
           </div>
-          <button onClick={handleCancel}>Cancel</button>
+          <button onClick={handleCancel} type="button">
+            Cancel
+          </button>
         </div>
       </form>
     </div>
