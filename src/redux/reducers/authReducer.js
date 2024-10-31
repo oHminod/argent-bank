@@ -8,7 +8,6 @@ const initialState = {
     firstName: "",
     lastName: "",
   },
-  rememberMe: false,
 };
 
 const authReducer = (state = initialState, action) => {
@@ -17,7 +16,6 @@ const authReducer = (state = initialState, action) => {
       return {
         ...state,
         token: action.payload.token,
-        rememberMe: action.payload.rememberMe,
       };
     case "LOGOUT":
       return initialState;

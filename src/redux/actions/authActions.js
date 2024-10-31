@@ -1,14 +1,19 @@
 export const login = (token, rememberMe) => {
-  return {
-    type: "LOGIN",
-    payload: { token, rememberMe },
+  return (dispatch) => {
+    dispatch({
+      type: "LOGIN",
+      payload: { token },
+    });
+    dispatch({
+      type: "SET_REMEMBER_ME",
+      payload: { rememberMe },
+    });
   };
 };
 
-export const logout = () => {
-  return {
-    type: "LOGOUT",
-  };
+export const logout = () => (dispatch) => {
+  dispatch({ type: "LOGOUT" });
+  dispatch({ type: "SET_REMEMBER_ME", payload: { rememberMe: false } });
 };
 
 export const updateUserData = (userData) => {
