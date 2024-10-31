@@ -45,3 +45,27 @@ export const getUser = async (token) => {
     return error;
   }
 };
+
+export const updateUser = async (token, newFirstName, newLastName) => {
+  try {
+    const response = await fetch("http://localhost:3001/api/v1/user/profile", {
+      method: "PUT",
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        firstName: newFirstName,
+        lastName: newLastName,
+      }),
+    });
+
+    if (!response.ok) return response;
+    await response.json();
+
+    return { ok: response.ok };
+  } catch (error) {
+    console.error("updateUser error:", error);
+    return error;
+  }
+};

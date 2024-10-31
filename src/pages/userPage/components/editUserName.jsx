@@ -2,6 +2,7 @@ import PropTypes from "prop-types";
 import { useDispatch, useSelector } from "react-redux";
 import { updateUserData } from "../../../redux/actions/authActions";
 import { useState } from "react";
+import { updateUser } from "../../../utils/data-access-layer";
 
 const EditUserName = ({ setIsEditName }) => {
   const [error, setError] = useState(null);
@@ -22,20 +23,9 @@ const EditUserName = ({ setIsEditName }) => {
     const newFirstName = firstNameInput || firstName;
     const newLastName = lastNameInput || lastName;
 
-    const response = await fetch("http://localhost:3001/api/v1/user/profile", {
-      method: "PUT",
-      headers: {
-        Authorization: `Bearer ${token}`,
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        firstName: newFirstName,
-        lastName: newLastName,
-      }),
-    });
+    const response = await updateUser(token, newFirstName, newLastName);
 
     if (!response.ok) return setError(response);
-    await response.json();
 
     dispatch(
       updateUserData({ firstName: newFirstName, lastName: newLastName })
@@ -75,7 +65,7 @@ const EditUserName = ({ setIsEditName }) => {
       {error && (
         <>
           <p className="error">
-            {error.status +
+            {(error.status || 520) +
               " - " +
               (error.message || error.statusText || "Unknown error")}
           </p>
