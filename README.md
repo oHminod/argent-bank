@@ -32,10 +32,10 @@ npm run dev
 
 ## Scripts
 
-    * `npm run dev` : Lance l'application en mode développement.
-    * `npm run build` : Crée une version de production de l'application.
-    * `npm run lint` : Exécute ESLint pour vérifier le code.
-    * `npm run preview` : Lance un serveur local pour prévisualiser la version de production de l'application.
+- `npm run dev` : Lance l'application en mode développement.
+- `npm run build` : Crée une version de production de l'application.
+- `npm run lint` : Exécute ESLint pour vérifier le code.
+- `npm run preview` : Lance un serveur local pour prévisualiser la version de production de l'application.
 
 ## Structure du projet
 
@@ -83,7 +83,7 @@ vite.config.js
 
 ## Dépendances principales
 
-    * Vite
-    * React
-    * React Router DOM
-    * Redux
+- Vite
+- React
+- React Router DOM
+- Redux
