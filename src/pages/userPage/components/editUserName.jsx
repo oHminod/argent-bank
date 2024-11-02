@@ -62,13 +62,15 @@ const EditUserName = ({ setIsEditName }) => {
           </button>
         </div>
       </form>
-      {error && (
-        <p className="error">
-          {(error.status || 520) +
-            " - " +
-            (error.message || error.statusText || "Unknown error")}
-        </p>
-      )}
+      {typeof error === "string"
+        ? error && <p className="error">{error} </p>
+        : error && (
+            <p className="error">
+              {(error.status || 520) +
+                " - " +
+                (error.statusText || "Unknown error")}
+            </p>
+          )}
     </div>
   );
 };

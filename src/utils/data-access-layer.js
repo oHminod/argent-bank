@@ -1,6 +1,8 @@
+const apiURL = "http://localhost:3001/api/v1/user";
+
 export const signinUser = async (email, password) => {
   try {
-    const response = await fetch("http://localhost:3001/api/v1/user/login", {
+    const response = await fetch(`${apiURL}/login`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -19,13 +21,13 @@ export const signinUser = async (email, password) => {
     return { ok: response.ok, token };
   } catch (error) {
     console.error("signinUser error:", error);
-    return error;
+    return String(error);
   }
 };
 
 export const getUser = async (token) => {
   try {
-    const response = await fetch("http://localhost:3001/api/v1/user/profile", {
+    const response = await fetch(`${apiURL}/profile`, {
       method: "POST",
       headers: {
         Authorization: `Bearer ${token}`,
@@ -42,13 +44,13 @@ export const getUser = async (token) => {
     return { ok: response.ok, userData };
   } catch (error) {
     console.error("getUser error:", error);
-    return error;
+    return String(error);
   }
 };
 
 export const updateUser = async (token, newFirstName, newLastName) => {
   try {
-    const response = await fetch("http://localhost:3001/api/v1/user/profile", {
+    const response = await fetch(`${apiURL}/profile`, {
       method: "PUT",
       headers: {
         Authorization: `Bearer ${token}`,
@@ -66,6 +68,6 @@ export const updateUser = async (token, newFirstName, newLastName) => {
     return { ok: response.ok };
   } catch (error) {
     console.error("updateUser error:", error);
-    return error;
+    return String(error);
   }
 };
