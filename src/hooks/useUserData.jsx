@@ -2,11 +2,12 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getUser } from "../utils/data-access-layer";
 import { logout, updateUserData } from "../redux/actions/authActions";
+import { getToken } from "../redux/store/selectors";
 
 const useUserData = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const token = useSelector((state) => state.auth.token);
+  const token = useSelector(getToken);
 
   const dispatch = useDispatch();
 

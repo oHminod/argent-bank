@@ -3,11 +3,12 @@ import { useDispatch, useSelector } from "react-redux";
 import { updateUserData } from "../../../redux/actions/authActions";
 import { useState } from "react";
 import { updateUser } from "../../../utils/data-access-layer";
+import { getToken, getUserData } from "../../../redux/store/selectors";
 
 const EditUserName = ({ setIsEditName }) => {
   const [error, setError] = useState(null);
-  const token = useSelector((state) => state.auth.token);
-  const { firstName, lastName } = useSelector((state) => state.auth.userData);
+  const token = useSelector(getToken);
+  const { firstName, lastName } = useSelector(getUserData);
   const dispatch = useDispatch();
 
   const handleCancel = () => {
