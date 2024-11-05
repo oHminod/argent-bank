@@ -1,13 +1,14 @@
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { logout } from "../../redux/actions/authActions";
+import { getToken, getUserData } from "../../redux/store/selectors";
 
 const NavMenu = () => {
   const navigate = useNavigate();
   const location = useLocation();
-  const token = useSelector((state) => state.auth.token);
+  const token = useSelector(getToken);
   const dispatch = useDispatch();
-  const { firstName } = useSelector((state) => state.auth.userData);
+  const { firstName } = useSelector(getUserData);
 
   const handleSignout = () => {
     dispatch(logout());

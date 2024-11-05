@@ -1,10 +1,11 @@
 import { useState } from "react";
 import { useSelector } from "react-redux";
 import EditUserName from "./editUserName";
+import { getUserData } from "../../../redux/store/selectors";
 
 const UserName = () => {
   const [isEditName, setIsEditName] = useState(false);
-  const { firstName, lastName } = useSelector((state) => state.auth.userData);
+  const { firstName, lastName } = useSelector(getUserData);
 
   const handleEditName = () => {
     setIsEditName(true);

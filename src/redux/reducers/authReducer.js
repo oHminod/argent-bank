@@ -8,6 +8,7 @@ const initialState = {
     firstName: "",
     lastName: "",
   },
+  rememberMe: false,
 };
 
 const authReducer = (state = initialState, action) => {
@@ -23,6 +24,11 @@ const authReducer = (state = initialState, action) => {
       return {
         ...state,
         userData: { ...state.userData, ...action.payload },
+      };
+    case "SET_REMEMBER_ME":
+      return {
+        ...state,
+        rememberMe: action.payload.rememberMe,
       };
     default:
       return state;
