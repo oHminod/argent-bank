@@ -41,6 +41,8 @@ npm run dev
 
 ```
 public/
+    argentBankLogo.png
+    ...
 src/
     components/
         layout/
@@ -53,17 +55,25 @@ src/
     pages/
         homePage/
             components/
+                ...
             homePage.jsx
         signinPage/
             signinPage.jsx
         userPage/
             components/
+                ...
             userPage.jsx
         errorPage.jsx
     redux/
         actions/
+            authActions.js
         reducers/
+            authReducer.js
+            index.js
         store/
+            localStorage.js
+            selectors.js
+            store.js
     utils/
         data-access-layer.js
         data.js
@@ -86,4 +96,5 @@ vite.config.js
 - Vite
 - React
 - React Router DOM
-- Redux
+- React Redux
+- Redux Toolkit
