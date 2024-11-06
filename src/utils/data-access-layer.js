@@ -1,8 +1,8 @@
-const apiURL = "http://localhost:3001/api/v1/user";
+const apiURL = "http://localhost:3001/api/v1";
 
 export const signinUser = async (email, password) => {
   try {
-    const response = await fetch(`${apiURL}/login`, {
+    const response = await fetch(`${apiURL}/user/login`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -27,7 +27,7 @@ export const signinUser = async (email, password) => {
 
 export const getUser = async (token) => {
   try {
-    const response = await fetch(`${apiURL}/profile`, {
+    const response = await fetch(`${apiURL}/user/profile`, {
       method: "POST",
       headers: {
         Authorization: `Bearer ${token}`,
@@ -50,7 +50,7 @@ export const getUser = async (token) => {
 
 export const updateUser = async (token, newFirstName, newLastName) => {
   try {
-    const response = await fetch(`${apiURL}/profile`, {
+    const response = await fetch(`${apiURL}/user/profile`, {
       method: "PUT",
       headers: {
         Authorization: `Bearer ${token}`,
