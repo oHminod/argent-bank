@@ -6,8 +6,8 @@ import { getToken, getUserData } from "../../redux/store/selectors";
 const NavMenu = () => {
   const navigate = useNavigate();
   const location = useLocation();
-  const token = useSelector(getToken);
   const dispatch = useDispatch();
+  const token = useSelector(getToken);
   const { firstName } = useSelector(getUserData);
 
   const handleSignout = () => {
