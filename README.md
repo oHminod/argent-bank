@@ -22,6 +22,8 @@ cd argent-bank
 npm install
 ```
 
+4. La partie back-end de l'application est hébergée sur [ce dépôt](https://github.com/OpenClassrooms-Student-Center/Project-10-Bank-API). Suivez les instructions pour l'installer et la lancer.
+
 ## Utilisation
 
 Pour lancer l'application en mode développement, exécutez la commande suivante :
@@ -98,3 +100,8 @@ vite.config.js
 - React Router DOM
 - React Redux
 - Redux Toolkit
+
+## Versions alternatives
+
+- [Version avec Redux Persist](https://github.com/oHminod/argent-bank/tree/redux-persist)
+- [Version typeScript](https://github.com/oHminod/argentbank)
