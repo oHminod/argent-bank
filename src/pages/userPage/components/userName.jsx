@@ -3,6 +3,13 @@ import { useSelector } from "react-redux";
 import EditUserName from "./editUserName";
 import { getUserData } from "../../../redux/store/selectors";
 
+/**
+ * Renders the user's name with an option to edit it.
+ *
+ * @function
+ * @name UserName
+ * @returns {JSX.Element} The rendered user name component.
+ */
 const UserName = () => {
   const [isEditName, setIsEditName] = useState(false);
   const { firstName, lastName } = useSelector(getUserData);

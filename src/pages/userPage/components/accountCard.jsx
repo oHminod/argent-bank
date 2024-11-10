@@ -1,5 +1,17 @@
 import PropTypes from "prop-types";
 
+/**
+ * Renders an account card with account information.
+ *
+ * @function
+ * @name AccountCard
+ * @param {Object} props - The component props.
+ * @param {Object} props.accountData - The account data.
+ * @param {string} props.accountData.title - The title of the account.
+ * @param {string} props.accountData.amount - The amount in the account.
+ * @param {string} props.accountData.description - The description of the account.
+ * @returns {JSX.Element} The rendered account card component.
+ */
 const AccountCard = ({ accountData }) => {
   const { title, amount, description } = accountData;
 
@@ -18,7 +30,11 @@ const AccountCard = ({ accountData }) => {
 };
 
 AccountCard.propTypes = {
-  accountData: PropTypes.object.isRequired,
+  accountData: PropTypes.shape({
+    title: PropTypes.string.isRequired,
+    amount: PropTypes.string.isRequired,
+    description: PropTypes.string.isRequired,
+  }).isRequired,
 };
 
 export default AccountCard;

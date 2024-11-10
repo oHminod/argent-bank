@@ -5,16 +5,41 @@ import { useState } from "react";
 import { updateUser } from "../../../utils/data-access-layer";
 import { getToken, getUserData } from "../../../redux/store/selectors";
 
+/**
+ * Renders a form to edit the user's name.
+ *
+ * @function
+ * @name EditUserName
+ * @param {Object} props - The component props.
+ * @param {Function} props.setIsEditName - Function to set the edit state.
+ * @returns {JSX.Element} The rendered edit user name component.
+ */
 const EditUserName = ({ setIsEditName }) => {
   const [error, setError] = useState(null);
   const token = useSelector(getToken);
   const { firstName, lastName } = useSelector(getUserData);
   const dispatch = useDispatch();
 
+  /**
+   * Handles the cancel action, setting the edit state to false.
+   *
+   * @function
+   * @name handleCancel
+   * @returns {void}
+   */
   const handleCancel = () => {
     setIsEditName(false);
   };
 
+  /**
+   * Handles the form submission to update the user's name.
+   *
+   * @async
+   * @function
+   * @name handleSubmit
+   * @param {Event} e - The form submission event.
+   * @returns {Promise<void>}
+   */
   const handleSubmit = async (e) => {
     e.preventDefault();
 

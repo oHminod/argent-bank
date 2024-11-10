@@ -5,12 +5,28 @@ import { login } from "../../redux/actions/authActions";
 import { signinUser } from "../../utils/data-access-layer";
 import ErrorPage from "../errorPage";
 
+/**
+ * Renders the sign-in page with a form for user authentication.
+ *
+ * @function
+ * @name SigninPage
+ * @returns {JSX.Element} The rendered sign-in page component.
+ */
 const SigninPage = () => {
   const navigate = useNavigate();
   const rememberCheckboxref = useRef(null);
   const dispatch = useDispatch();
   const [error, setError] = useState(null);
 
+  /**
+   * Handles the sign-in form submission.
+   *
+   * @async
+   * @function
+   * @name handleSignin
+   * @param {Event} e - The form submission event.
+   * @returns {Promise<void>}
+   */
   const handleSignin = async (e) => {
     e.preventDefault();
     const username =

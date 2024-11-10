@@ -5,6 +5,13 @@ import Layout from "../components/layout/layout";
 import SigninPage from "../pages/signinPage/signinPage";
 import UserPage from "../pages/userPage/userPage";
 
+/**
+ * Defines the routes for the application and returns the RouterProvider component.
+ *
+ * @function
+ * @name Router
+ * @returns {JSX.Element} The RouterProvider component with the defined routes.
+ */
 const Router = () => {
   const routes = createBrowserRouter([
     {

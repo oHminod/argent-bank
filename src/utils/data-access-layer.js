@@ -1,5 +1,15 @@
 const apiURL = "http://localhost:3001/api/v1";
 
+/**
+ * Signs in a user with the provided email and password.
+ *
+ * @async
+ * @function
+ * @name signinUser
+ * @param {string} email - The user's email address.
+ * @param {string} password - The user's password.
+ * @returns {Promise<Object>} The response object containing a token or an error message.
+ */
 export const signinUser = async (email, password) => {
   try {
     const response = await fetch(`${apiURL}/user/login`, {
@@ -25,6 +35,15 @@ export const signinUser = async (email, password) => {
   }
 };
 
+/**
+ * Fetches user data from the server.
+ *
+ * @async
+ * @function
+ * @name getUser
+ * @param {string} token - The authentication token.
+ * @returns {Promise<Object>} The response object containing user data or an error message.
+ */
 export const getUser = async (token) => {
   try {
     const response = await fetch(`${apiURL}/user/profile`, {
@@ -48,6 +67,17 @@ export const getUser = async (token) => {
   }
 };
 
+/**
+ * Updates user data on the server.
+ *
+ * @async
+ * @function
+ * @name updateUser
+ * @param {string} token - The authentication token.
+ * @param {string} newFirstName - The new first name of the user.
+ * @param {string} newLastName - The new last name of the user.
+ * @returns {Promise<Object>} The response object indicating success or failure.
+ */
 export const updateUser = async (token, newFirstName, newLastName) => {
   try {
     const response = await fetch(`${apiURL}/user/profile`, {

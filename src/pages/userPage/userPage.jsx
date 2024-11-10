@@ -4,6 +4,13 @@ import ErrorPage from "../errorPage";
 import UserName from "./components/userName";
 import { accounts } from "../../utils/data";
 
+/**
+ * Renders the user page with user data and account information.
+ *
+ * @function
+ * @name UserPage
+ * @returns {JSX.Element} The rendered user page component.
+ */
 const UserPage = () => {
   const { loading, error } = useUserData();
 

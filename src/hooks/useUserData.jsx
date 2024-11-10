@@ -4,6 +4,13 @@ import { getUser } from "../utils/data-access-layer";
 import { logout, updateUserData } from "../redux/actions/authActions";
 import { getToken } from "../redux/store/selectors";
 
+/**
+ * Custom hook to fetch and manage user data.
+ *
+ * @function
+ * @name useUserData
+ * @returns {Object} The loading state and error object.
+ */
 const useUserData = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);

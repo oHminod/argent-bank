@@ -1,6 +1,13 @@
 import { Link } from "react-router-dom";
 import NavMenu from "./navMenu";
 
+/**
+ * Renders the navigation bar with the logo and navigation menu.
+ *
+ * @function
+ * @name NavBar
+ * @returns {JSX.Element} The rendered navigation bar component.
+ */
 const NavBar = () => {
   return (
     <nav className="main-nav">
