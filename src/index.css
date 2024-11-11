@@ -284,6 +284,12 @@ a img:hover,
   font-style: italic;
 }
 
+.error-message {
+  color: red;
+  font-size: 1.2rem;
+  font-weight: 500;
+  font-style: italic;
+}
 .error {
   color: red;
   font-size: 1.2rem;

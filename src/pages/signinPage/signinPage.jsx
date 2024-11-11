@@ -17,6 +17,7 @@ const SigninPage = () => {
   const rememberCheckboxref = useRef(null);
   const dispatch = useDispatch();
   const [error, setError] = useState(null);
+  const [badRequest, setBadRequest] = useState(false);
 
   /**
    * Handles the sign-in form submission.
@@ -36,12 +37,26 @@ const SigninPage = () => {
 
     const signinResponse = await signinUser(username, password);
 
-    if (!signinResponse.ok) return setError(signinResponse);
+    if (!signinResponse.ok) {
+      if (signinResponse.status === 400) return setBadRequest(true);
+      return setError(signinResponse);
+    }
 
     const token = signinResponse.token;
     const rememberMe = rememberCheckboxref.current?.checked || false;
     dispatch(login(token, rememberMe));
     navigate("/profile");
+  };
+
+  /**
+   * Handles the input change event.
+   *
+   * @function
+   * @name handleInputChange
+   * @returns {void}
+   */
+  const handleInputChange = () => {
+    if (badRequest) setBadRequest(false);
   };
 
   if (error) return <ErrorPage error={error} />;
@@ -53,7 +68,13 @@ const SigninPage = () => {
         <form onSubmit={handleSignin}>
           <div className="input-wrapper">
             <label htmlFor="username">Username</label>
-            <input type="text" id="username" autoComplete="username" required />
+            <input
+              type="text"
+              id="username"
+              autoComplete="username"
+              onChange={handleInputChange}
+              required
+            />
           </div>
           <div className="input-wrapper">
             <label htmlFor="password">Password</label>
@@ -61,9 +82,15 @@ const SigninPage = () => {
               type="password"
               id="password"
               autoComplete="current-password"
+              onChange={handleInputChange}
               required
             />
           </div>
+          {badRequest && (
+            <p className="error-message">
+              Invalid username or password. Please try again.
+            </p>
+          )}
           <div className="input-remember">
             <input type="checkbox" id="remember-me" ref={rememberCheckboxref} />
             <label htmlFor="remember-me">Remember me</label>
