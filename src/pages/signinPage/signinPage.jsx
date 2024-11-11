@@ -53,7 +53,7 @@ const SigninPage = () => {
         <form onSubmit={handleSignin}>
           <div className="input-wrapper">
             <label htmlFor="username">Username</label>
-            <input type="text" id="username" autoComplete="username" />
+            <input type="text" id="username" autoComplete="username" required />
           </div>
           <div className="input-wrapper">
             <label htmlFor="password">Password</label>
@@ -61,6 +61,7 @@ const SigninPage = () => {
               type="password"
               id="password"
               autoComplete="current-password"
+              required
             />
           </div>
           <div className="input-remember">
